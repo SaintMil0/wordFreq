@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class Main {
+
+
+    public static int getWordFrequency(String[] wordsList, int listSize, String currWord) {
+        int freq = 0; //initialized
+        for (int i = 0; i < listSize; i++) { // counts up to the list size depending on user Integer input
+            if (wordsList[i].equals(currWord)) {    //if words in wordList matches the currword the freq count will increment
+                freq++;
+            }
+        }
+        return freq;
+    }
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in); // instantiates(creates new object) to allow user input
+
+        System.out.println("Enter the number of words: "); //notifies terminal "Enter the number of words: "
+        int listSize = scan.nextInt(); // scanner reads only integers
+        scan.nextLine(); //scans next string entered
+
+        String[] wordsList = new String[listSize]; //instantiates string only array named wordsList that takes the inputted integer to determine amount of elements
+        System.out.println("Enter the words: "); //notifies terminal "Enter the words:
+
+        for (int i = 0; i < listSize; i++) { // loop that enters the entered arrays into the wordList array
+            wordsList[i] = scan.next(); //For each iteration of the loop, the program reads a single word from the user input using scan.next()
+        }
+
+
+        for (int i = 0; i < listSize; i++) { //loop iterates over each word in the array
+            String currWord = wordsList[i]; //variable initialized to each word in the wordlist loop to be counted and processed
+            if (!currWord.equals("")) { // checks if the word has been counted, If word isnt an empty string (""), it hasn't been counted yet, then count it. If it is an empty string, it has already been counted, so it will be skipped.
+                int freq = getWordFrequency(wordsList, listSize, currWord); //the getWordfrequancy is then called to get the frequency of currWord in the wordsList.
+                System.out.println(currWord + " " + freq); //prints the currWord and its number of times its appeared in the list with double quotes to give a space between the currword and frequency count
+
+
+                for (int j = 0; j < listSize; j++) { //The loop checks each word in wordsList and if it matches the current word (currWord), it replaces that word with an empty string ""
+                    if (wordsList[j].equals(currWord)) {
+                        wordsList[j] = "";
+                    }
+                }
+            }
+        }
+
+        scan.close();
+    }
+}
